@@ -3,7 +3,7 @@ import axios from 'axios';
 // Create axios instance with base configuration
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://buildbazaarx.onrender.com/api',
-  timeout: 80000, // Increased timeout to 30 seconds for email operations
+  timeout: 70000, // Increased timeout to 30 seconds for email operations
   headers: {
     'Content-Type': 'application/json',
   },
