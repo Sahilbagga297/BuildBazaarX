@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: 'https://buildbazaarx.onrender.com/api/contact',
+  baseURL: 'https://buildbazaarx.onrender.com/api',
   timeout: 70000, // Increased timeout to 30 seconds for email operations
   headers: {
     'Content-Type': 'application/json',
