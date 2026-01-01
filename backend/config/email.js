@@ -6,11 +6,14 @@ dotenv.config();
 // Create transporter for sending emails
 const createTransporter = () => {
   return nodemailer.createTransport({
-    service: 'gmail', // You can change this to other services like 'outlook', 'yahoo', etc.
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // because we use STARTTLS on port 587
     auth: {
-      user: process.env.EMAIL_USER, // Your email
-      pass: process.env.EMAIL_PASS  // Your email password or app password
-    }
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    },
+    connectionTimeout: 15000, // prevent long timeouts
   });
 };
 
