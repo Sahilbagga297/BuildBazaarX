@@ -114,8 +114,8 @@ export const emailTemplates = {
             
             <p>In the meantime, feel free to:</p>
             <ul style="color: #4b5563;">
-              <li>Browse our <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/marketplace" style="color: #f59e0b;">marketplace</a> for furniture and home decor</li>
-              <li>Check out our <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/professionals" style="color: #f59e0b;">professional services</a></li>
+              <li>Browse our <a href="${process.env.FRONTEND_URL || 'https://build-bazaar-x.vercel.app'}/marketplace" style="color: #f59e0b;">marketplace</a> for furniture and home decor</li>
+              <li>Check out our <a href="${process.env.FRONTEND_URL || 'https://build-bazaar-x.vercel.app'}/professionals" style="color: #f59e0b;">professional services</a></li>
               <li>Follow us on social media for updates and inspiration</li>
             </ul>
             
