@@ -18,7 +18,7 @@ const createTransporter = () => {
 export const emailTemplates = {
   contactForm: (formData) => {
     const isProfessionalBooking = formData.bookProfessional;
-    
+
     let emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
         <div style="background: linear-gradient(135deg, #f59e0b, #ea580c); padding: 30px; border-radius: 10px; margin-bottom: 20px;">
@@ -77,7 +77,7 @@ export const emailTemplates = {
         </div>
       </div>
     `;
-    
+
     return {
       subject: `New Contact Form Submission${isProfessionalBooking ? ' - Professional Booking Request' : ''} - ${formData.subject}`,
       html: emailContent
@@ -86,7 +86,7 @@ export const emailTemplates = {
 
   autoReply: (formData) => {
     const isProfessionalBooking = formData.bookProfessional;
-    
+
     return {
       subject: 'Thank you for contacting BuildBazaarX - We\'ll be in touch soon!',
       html: `
@@ -137,14 +137,14 @@ export const emailTemplates = {
 export const sendEmail = async (to, subject, html) => {
   try {
     const transporter = createTransporter();
-    
+
     const mailOptions = {
       from: `"BuildBazaarX" <${process.env.EMAIL_USER}>`,
       to: to,
       subject: subject,
       html: html
     };
-    
+
     const result = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', result.messageId);
     return { success: true, messageId: result.messageId };
@@ -154,4 +154,18 @@ export const sendEmail = async (to, subject, html) => {
   }
 };
 
-export default { createTransporter, emailTemplates, sendEmail };
+// Verify email configuration
+export const verifyEmailConfig = async () => {
+  try {
+    const transporter = createTransporter();
+    await transporter.verify();
+    console.log('✅ Email service is ready to take messages');
+    return true;
+  } catch (error) {
+    console.error('❌ Email service verification failed:', error.message);
+    // Don't crash the server, just log the error
+    return false;
+  }
+};
+
+export default { createTransporter, emailTemplates, sendEmail, verifyEmailConfig };
