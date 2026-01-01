@@ -1,5 +1,4 @@
 import { sendEmail, emailTemplates } from '../config/email.js';
-import emailQueue from '../utils/emailQueue.js';
 
 // Send contact form email
 export const sendContactForm = async (req, res) => {
@@ -30,8 +29,19 @@ export const sendContactForm = async (req, res) => {
       }
     }
 
-    // Queue emails for background processing
-    emailQueue.queueContactEmails(formData);
+    // 🟢 DIRECT EMAIL SENDING (instead of queue)
+    const template = emailTemplates.contactForm(formData);
+
+    try {
+      const info = await sendEmail(template, formData.email);
+      console.log("EMAIL SENT:", info.accepted || info.response);
+    } catch (emailError) {
+      console.error("EMAIL SENDING FAILED:", emailError);
+      return res.status(500).json({
+        success: false,
+        message: "Contact form submitted but email sending failed.",
+      });
+    }
 
     // Log the contact form submission
     console.log('Contact form submitted:', {
@@ -44,10 +54,10 @@ export const sendContactForm = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Contact form submitted successfully. We will get back to you within 24 hours.',
+      message: 'Contact form submitted successfully. Check your email — we will get back to you within 24 hours.',
       data: {
         submittedAt: new Date().toISOString(),
-        emailsQueued: true
+        emailDelivered: true
       }
     });
 
@@ -56,29 +66,6 @@ export const sendContactForm = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Internal server error. Please try again later.'
-    });
-  }
-};
-
-// Get contact form statistics (for admin dashboard)
-export const getContactStats = async (req, res) => {
-  try {
-    // This would typically fetch from a database
-    // For now, return mock data
-    res.status(200).json({
-      success: true,
-      data: {
-        totalSubmissions: 0,
-        professionalBookings: 0,
-        generalInquiries: 0,
-        lastSubmission: null
-      }
-    });
-  } catch (error) {
-    console.error('Error in getContactStats:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch contact statistics'
     });
   }
 };
