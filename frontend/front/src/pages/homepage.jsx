@@ -7,11 +7,11 @@ const Homepage = () => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-hidden">
       {/* Hero Section with Split Design */}
-      <section className="relative h-screen flex overflow-hidden">
+      <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
         {/* Left Side - Image */}
-        <div className="w-1/2 relative">
+        <div className="w-full lg:w-1/2 h-[50vh] lg:h-auto relative">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-900/20 z-10"></div>
-          <img 
+          <img
             src={image} // User will add image source here
             alt="Modern Building Architecture"
             className="w-full h-full object-cover"
@@ -22,7 +22,7 @@ const Homepage = () => {
         </div>
 
         {/* Right Side - Content */}
-        <div className="w-1/2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
+        <div className="w-full lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden py-12 lg:py-0">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-amber-500/20 to-orange-500/20"></div>
@@ -31,13 +31,13 @@ const Homepage = () => {
           </div>
 
           <div className="text-center px-12 relative z-10">
-            <h1 className="text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="text-white">Build</span>
               <span className="text-amber-400"> Bazaar</span>
               <span className="text-orange-400"> X</span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto mb-8"></div>
-            
+
             <p className="text-xl text-gray-300 mb-4 leading-relaxed">
               Premium Furniture & Expert Craftsmanship
             </p>
@@ -54,7 +54,7 @@ const Homepage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 to-orange-50/50"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">
               Our Premium Services
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto mb-4"></div>
@@ -63,7 +63,7 @@ const Homepage = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Ready-Made Furniture */}
             <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -158,11 +158,11 @@ const Homepage = () => {
           <div className="absolute top-10 left-10 w-32 h-32 border border-amber-400/20 rounded-full"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 border border-orange-400/20 rounded-lg rotate-45"></div>
         </div>
-        
+
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center group">
-              <div className="text-5xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 100+
               </div>
               <div className="text-gray-300 text-lg">Happy Customers</div>
@@ -195,14 +195,14 @@ const Homepage = () => {
 
       {/* Call to Action - Modern Approach */}
       <section className="py-24 bg-gradient-to-br from-amber-50 via-white to-orange-50 relative">
-        <div className="max-w-4xl mx-auto text-center px-4 relE MERN STACK\BuildBazaarX\frontend\front\src\paative z-10">
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">
+        <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">
             Ready to Transform Your Space?
           </h2>
           <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
             Join 100+ of satisfied customers who've created their dream homes with our premium furniture and expert craftsmanship.
           </p>
-          
+
         </div>
 
         {/* Floating decoration */}

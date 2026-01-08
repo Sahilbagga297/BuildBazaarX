@@ -96,7 +96,7 @@ const Navbar = () => {
   }, []);
 
   return (
-  <nav className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl sticky top-0 z-50 relative overflow-visible">
+    <nav className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl sticky top-0 z-50 relative overflow-visible">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-amber-500/10 to-orange-500/10"></div>
@@ -109,9 +109,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              <img 
-                src={logo} 
-                alt="Build Bazaar X Logo" 
+              <img
+                src={logo}
+                alt="Build Bazaar X Logo"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -193,8 +193,8 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Auth Section */}
-          <div className="flex items-center space-x-4">
+          {/* Auth Section - Hidden on mobile */}
+          <div className="hidden md:flex items-center space-x-4">
             {isAuthenticated ? (
               <div className="relative z-[9999]">
                 <button
@@ -206,7 +206,7 @@ const Navbar = () => {
                   aria-haspopup="menu"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
-                      <span className="text-white text-lg font-bold">
+                    <span className="text-white text-lg font-bold">
                       {user?.name ? String(user.name).charAt(0).toUpperCase() : "U"}
                     </span>
                   </div>
@@ -220,9 +220,8 @@ const Navbar = () => {
                     )}
                   </div>
                   <svg
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      isDropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -288,39 +287,68 @@ const Navbar = () => {
                 >
                   Login / Signup
                 </Link>
-                <Link
-                  to="/login"
-                  state={{ signup: true }}
-                  onClick={() => {
-                    console.log('Sign Up button clicked');
-                  }}
-                  // className="border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-white px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-                >
-                  {/* Sign Up */}
-                </Link>
               </>
             )}
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-gray-300 hover:text-amber-400 p-2 rounded-xl hover:bg-gradient-to-r hover:from-amber-500/20 hover:to-orange-500/20 transition-all duration-300">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="text-gray-300 hover:text-amber-400 p-2 rounded-xl hover:bg-gradient-to-r hover:from-amber-500/20 hover:to-orange-500/20 transition-all duration-300"
+            >
               <svg
                 className="h-7 w-7"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                {isDropdownOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isDropdownOpen && (
+          <div className="md:hidden absolute top-20 left-0 w-full bg-slate-900 shadow-xl border-t border-slate-800 z-40">
+            <div className="px-4 pt-2 pb-6 space-y-2">
+              <Link to="/" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">Home</Link>
+              <Link to="/marketplace" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">Marketplace</Link>
+              {isAuthenticated && (
+                <Link to="/professionals" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">Professionals</Link>
+              )}
+              <Link to="/about" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">About</Link>
+              <Link to="/contact" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">Contact</Link>
+
+              <div className="pt-4 border-t border-slate-700">
+                {isAuthenticated ? (
+                  <div className="space-y-2">
+                    <div className="px-3 flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-sm font-bold">
+                          {user?.name ? String(user.name).charAt(0).toUpperCase() : "U"}
+                        </span>
+                      </div>
+                      <span className="text-gray-300">{user?.name}</span>
+                    </div>
+                    <Link to="/profile" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">Profile</Link>
+                    <Link to="/orders" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 rounded-md">My Orders</Link>
+                    <button onClick={handleLogout} className="block w-full text-left px-3 py-2 text-base font-medium text-red-400 hover:text-red-300 hover:bg-slate-800 rounded-md">Logout</button>
+                  </div>
+                ) : (
+                  <Link to="/login" className="block w-full text-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full font-semibold text-lg hover:shadow-lg transition-all">
+                    Login / Signup
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
