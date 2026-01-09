@@ -13,7 +13,7 @@ const Orders = () => {
     setLoading(true);
     try {
       const result = await ordersAPI.getOrders();
-      
+
       if (result.success) {
         // Transform the data to match the expected format
         const transformedOrders = result.data.map(order => ({
@@ -63,7 +63,7 @@ const Orders = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
-    
+
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
@@ -134,10 +134,10 @@ const Orders = () => {
       if (result.success) {
         // Format tracking information for display
         const trackingInfo = result.data;
-        const trackingHistory = trackingInfo.trackingHistory.map(entry => 
+        const trackingHistory = trackingInfo.trackingHistory.map(entry =>
           `${entry.status}: ${entry.description} (${new Date(entry.timestamp).toLocaleDateString()})`
         ).join('\n');
-        
+
         alert(`Order ${orderId} Tracking Information:\n\nStatus: ${trackingInfo.status}\nTracking Number: ${trackingInfo.trackingNumber || 'Not available'}\nEstimated Delivery: ${new Date(trackingInfo.estimatedDelivery).toLocaleDateString()}\n\nTracking History:\n${trackingHistory}`);
       } else {
         alert(`Failed to track order: ${result.error}`);
@@ -213,11 +213,10 @@ const Orders = () => {
                 <button
                   key={key}
                   onClick={() => setFilter(key)}
-                  className={`px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center ${
-                    filter === key
+                  className={`px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center ${filter === key
                       ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-xl'
                       : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
-                  }`}
+                    }`}
                 >
                   <span className="mr-2 text-lg">{icon}</span>
                   {label} ({count})
@@ -236,7 +235,7 @@ const Orders = () => {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">No orders found</h3>
               <p className="text-gray-300 mb-8 text-lg">
-                {filter === 'all' 
+                {filter === 'all'
                   ? "You haven't placed any orders yet. Start shopping to see your orders here!"
                   : `No orders with status "${filter}" found.`
                 }
@@ -266,15 +265,14 @@ const Orders = () => {
                         <p className="text-gray-300 text-lg">Placed on {new Date(order.date).toLocaleDateString()}</p>
                       </div>
                       <div className="mt-4 sm:mt-0">
-                        <span className={`inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold border backdrop-blur-sm ${
-                          order.status === 'completed' 
-                            ? 'bg-green-500/20 text-green-200 border-green-400/30' 
+                        <span className={`inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold border backdrop-blur-sm ${order.status === 'completed'
+                            ? 'bg-green-500/20 text-green-200 border-green-400/30'
                             : order.status === 'processing'
-                            ? 'bg-yellow-500/20 text-yellow-200 border-yellow-400/30'
-                            : order.status === 'shipped'
-                            ? 'bg-blue-500/20 text-blue-200 border-blue-400/30'
-                            : 'bg-gray-500/20 text-gray-200 border-gray-400/30'
-                        }`}>
+                              ? 'bg-yellow-500/20 text-yellow-200 border-yellow-400/30'
+                              : order.status === 'shipped'
+                                ? 'bg-blue-500/20 text-blue-200 border-blue-400/30'
+                                : 'bg-gray-500/20 text-gray-200 border-gray-400/30'
+                          }`}>
                           {getStatusIcon(order.status)}
                           <span className="ml-2 capitalize">{order.status}</span>
                         </span>
@@ -286,20 +284,20 @@ const Orders = () => {
                   <div className="p-8">
                     <div className="space-y-6">
                       {order.items.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between py-6 border-b border-white/10 last:border-b-0 group/item">
-                          <div className="flex items-center space-x-6">
-                            <div className="w-20 h-20 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
-                              <svg className="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-6 border-b border-white/10 last:border-b-0 group/item gap-4 sm:gap-0">
+                          <div className="flex items-center space-x-4 sm:space-x-6 w-full sm:w-auto">
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300 flex-shrink-0">
+                              <svg className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                               </svg>
                             </div>
                             <div>
-                              <h4 className="font-semibold text-white text-lg">{item.name}</h4>
-                              <p className="text-gray-300">Quantity: {item.quantity}</p>
+                              <h4 className="font-semibold text-white text-base sm:text-lg">{item.name}</h4>
+                              <p className="text-gray-300 text-sm sm:text-base">Quantity: {item.quantity}</p>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <p className="font-bold text-white text-xl">₹{item.price.toFixed(2)}</p>
+                          <div className="text-right w-full sm:w-auto">
+                            <p className="font-bold text-white text-lg sm:text-xl">₹{item.price.toFixed(2)}</p>
                           </div>
                         </div>
                       ))}
@@ -315,7 +313,7 @@ const Orders = () => {
 
                     {/* Order Actions */}
                     <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                      <button 
+                      <button
                         onClick={() => handleTrackOrder(order.id)}
                         className="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center"
                       >

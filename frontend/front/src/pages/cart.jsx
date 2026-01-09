@@ -13,7 +13,7 @@ const Cart = () => {
     getTotalItems,
     getTotalPriceFormatted
   } = useCart();
-  
+
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -43,7 +43,7 @@ const Cart = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddressForm(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error when user starts typing
     if (formErrors[name]) {
       setFormErrors(prev => ({ ...prev, [name]: '' }));
@@ -54,19 +54,19 @@ const Cart = () => {
   const validateForm = () => {
     const errors = {};
     const { name, phone, address, city, state, zipCode } = addressForm;
-    
+
     if (!name.trim()) errors.name = 'Name is required';
     if (!phone.trim()) errors.phone = 'Phone number is required';
     if (!address.trim()) errors.address = 'Address is required';
     if (!city.trim()) errors.city = 'City is required';
     if (!state.trim()) errors.state = 'State is required';
     if (!zipCode.trim()) errors.zipCode = 'Zip code is required';
-    
+
     // Phone validation
     if (phone && !/^[0-9]{10}$/.test(phone.replace(/\D/g, ''))) {
       errors.phone = 'Please enter a valid 10-digit phone number';
     }
-    
+
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -110,7 +110,7 @@ const Cart = () => {
         setOrderDetails(result.data.order);
         setShowOrderConfirmation(true);
 
-        if ('vibrate' in navigator) navigator.vibrate([100,50,100]);
+        if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
         setCheckoutMessage('✅ Order placed successfully! You can view it in "My Orders" section.');
 
         if ('Notification' in window && Notification.permission === 'granted') {
@@ -125,7 +125,7 @@ const Cart = () => {
           setShowOrderConfirmation(false);
           setShowAnimation(false);
         }, 3000);
-        
+
         setTimeout(() => setCheckoutMessage(''), 10000);
         setStep(1);
       } else {
@@ -213,22 +213,21 @@ const Cart = () => {
               </div>
               <div className="divide-y divide-gray-100">
                 {cartItems.map((item, index) => (
-                  <div 
-                    key={item.id} 
-                    className={`p-6 transition-all duration-300 ${
-                      removingItem === item.id 
-                        ? 'opacity-0 transform scale-95' 
+                  <div
+                    key={item.id}
+                    className={`p-6 transition-all duration-300 ${removingItem === item.id
+                        ? 'opacity-0 transform scale-95'
                         : 'opacity-100 transform scale-100'
-                    }`}
+                      }`}
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-24 h-24 bg-gray-100 rounded-xl overflow-hidden shadow-sm">
-                          <img 
-                            src={item.image} 
-                            alt={item.name} 
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+                      <div className="flex items-center space-x-4 w-full sm:w-auto">
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                           />
                         </div>
                         <div className="flex-1">
@@ -237,11 +236,11 @@ const Cart = () => {
                           <p className="text-amber-600 font-bold text-xl">₹{parseFloat(item.price.replace(/[₹$,]/g, '')).toFixed(2)}</p>
                         </div>
                       </div>
-                      
-                      <div className="flex items-center space-x-4">
+
+                      <div className="flex items-center justify-between w-full sm:w-auto sm:space-x-4">
                         {/* Quantity Controls */}
                         <div className="flex items-center bg-gray-50 rounded-lg p-1">
-                          <button 
+                          <button
                             onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                             className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition-colors duration-200"
                           >
@@ -250,7 +249,7 @@ const Cart = () => {
                             </svg>
                           </button>
                           <span className="px-3 py-1 text-sm font-medium min-w-[2rem] text-center">{item.quantity}</span>
-                          <button 
+                          <button
                             onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                             className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition-colors duration-200"
                           >
@@ -259,11 +258,11 @@ const Cart = () => {
                             </svg>
                           </button>
                         </div>
-                        
+
                         {/* Remove Button */}
-                        <button 
+                        <button
                           onClick={() => handleRemoveItem(item.id)}
-                          className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200"
+                          className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200 ml-4 sm:ml-0"
                           title="Remove item"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -282,7 +281,7 @@ const Cart = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
               <h2 className="text-xl font-semibold mb-6 text-gray-900">Order Summary</h2>
-              
+
               {/* Order Details */}
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-600">
@@ -297,7 +296,7 @@ const Cart = () => {
                   <span>Tax</span>
                   <span className="font-medium">Calculated at checkout</span>
                 </div>
-                <hr className="border-gray-200"/>
+                <hr className="border-gray-200" />
                 <div className="flex justify-between text-lg font-bold text-gray-900">
                   <span>Total</span>
                   <span className="text-amber-600">{getTotalPriceFormatted()}</span>
@@ -306,11 +305,10 @@ const Cart = () => {
 
               {/* Checkout Message */}
               {checkoutMessage && (
-                <div className={`mb-6 p-4 rounded-xl ${
-                  checkoutMessage.includes('✅') 
-                    ? 'bg-green-50 text-green-800 border border-green-200' 
+                <div className={`mb-6 p-4 rounded-xl ${checkoutMessage.includes('✅')
+                    ? 'bg-green-50 text-green-800 border border-green-200'
                     : 'bg-red-50 text-red-800 border border-red-200'
-                }`}>
+                  }`}>
                   {checkoutMessage}
                 </div>
               )}
@@ -319,18 +317,16 @@ const Cart = () => {
               <div className="mb-6">
                 <div className="flex items-center justify-between">
                   <div className={`flex items-center ${step >= 1 ? 'text-amber-600' : 'text-gray-400'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      step >= 1 ? 'bg-amber-600 text-white' : 'bg-gray-200'
-                    }`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step >= 1 ? 'bg-amber-600 text-white' : 'bg-gray-200'
+                      }`}>
                       1
                     </div>
                     <span className="ml-2 text-sm font-medium">Address</span>
                   </div>
                   <div className={`flex-1 h-0.5 mx-4 ${step >= 2 ? 'bg-amber-600' : 'bg-gray-200'}`}></div>
                   <div className={`flex items-center ${step >= 2 ? 'text-amber-600' : 'text-gray-400'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      step >= 2 ? 'bg-amber-600 text-white' : 'bg-gray-200'
-                    }`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step >= 2 ? 'bg-amber-600 text-white' : 'bg-gray-200'
+                      }`}>
                       2
                     </div>
                     <span className="ml-2 text-sm font-medium">Payment</span>
@@ -342,87 +338,81 @@ const Cart = () => {
               {step === 1 && (
                 <form className="space-y-4" onSubmit={handleAddressSubmit}>
                   <div>
-                    <input 
-                      name="name" 
-                      placeholder="Full Name" 
-                      value={addressForm.name} 
+                    <input
+                      name="name"
+                      placeholder="Full Name"
+                      value={addressForm.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                        formErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                     />
                     {formErrors.name && <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>}
                   </div>
-                  
+
                   <div>
-                    <input 
-                      name="phone" 
-                      placeholder="Phone Number" 
-                      value={addressForm.phone} 
+                    <input
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={addressForm.phone}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                        formErrors.phone ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.phone ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                     />
                     {formErrors.phone && <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>}
                   </div>
-                  
+
                   <div>
-                    <input 
-                      name="address" 
-                      placeholder="Street Address" 
-                      value={addressForm.address} 
+                    <input
+                      name="address"
+                      placeholder="Street Address"
+                      value={addressForm.address}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                        formErrors.address ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.address ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                     />
                     {formErrors.address && <p className="text-red-500 text-sm mt-1">{formErrors.address}</p>}
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <input 
-                        name="city" 
-                        placeholder="City" 
-                        value={addressForm.city} 
+                      <input
+                        name="city"
+                        placeholder="City"
+                        value={addressForm.city}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                          formErrors.city ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.city ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                          }`}
                       />
                       {formErrors.city && <p className="text-red-500 text-sm mt-1">{formErrors.city}</p>}
                     </div>
-                    
+
                     <div>
-                      <input 
-                        name="state" 
-                        placeholder="State" 
-                        value={addressForm.state} 
+                      <input
+                        name="state"
+                        placeholder="State"
+                        value={addressForm.state}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                          formErrors.state ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.state ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                          }`}
                       />
                       {formErrors.state && <p className="text-red-500 text-sm mt-1">{formErrors.state}</p>}
                     </div>
                   </div>
-                  
+
                   <div>
-                    <input 
-                      name="zipCode" 
-                      placeholder="ZIP Code" 
-                      value={addressForm.zipCode} 
+                    <input
+                      name="zipCode"
+                      placeholder="ZIP Code"
+                      value={addressForm.zipCode}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${
-                        formErrors.zipCode ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${formErrors.zipCode ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                        }`}
                     />
                     {formErrors.zipCode && <p className="text-red-500 text-sm mt-1">{formErrors.zipCode}</p>}
                   </div>
-                  
-                  <button 
-                    type="submit" 
+
+                  <button
+                    type="submit"
                     className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
                     Proceed to Payment
@@ -446,9 +436,9 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  
-                  <button 
-                    onClick={handleCheckout} 
+
+                  <button
+                    onClick={handleCheckout}
                     disabled={isProcessing}
                     className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:transform-none disabled:cursor-not-allowed"
                   >
@@ -464,8 +454,8 @@ const Cart = () => {
                       'Place Order - Cash on Delivery'
                     )}
                   </button>
-                  
-                  <button 
+
+                  <button
                     onClick={() => setStep(1)}
                     className="w-full text-gray-600 hover:text-gray-800 py-2 transition-colors duration-200"
                   >
@@ -506,10 +496,10 @@ const Cart = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            
+
             {/* Subtle Ripple Effect */}
             <div className="absolute inset-0 w-24 h-24 bg-green-400 rounded-full animate-ripple opacity-30"></div>
-            
+
             {/* Success Message */}
             <div className="absolute top-full mt-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-lg animate-fade-in">
               <p className="text-sm font-semibold text-gray-900 whitespace-nowrap">Order Placed Successfully!</p>

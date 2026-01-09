@@ -47,7 +47,7 @@ const Marketplace = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
+      element.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
@@ -224,7 +224,7 @@ const Marketplace = () => {
   const allItems = [...furnitureItems, ...materials];
   const filteredItems = allItems.filter(item => {
     let matchesCategory = false;
-    
+
     if (selectedCategory === 'all') {
       matchesCategory = true;
     } else if (selectedCategory === 'furniture') {
@@ -234,15 +234,15 @@ const Marketplace = () => {
       // Check if item is from materials array
       matchesCategory = materials.some(material => material.id === item.id);
     }
-    
+
     // Enhanced search functionality - search in name, description, and category
     const searchTerm = searchQuery.toLowerCase().trim();
-    const matchesSearch = searchTerm === '' || 
+    const matchesSearch = searchTerm === '' ||
       item.name.toLowerCase().includes(searchTerm) ||
       item.description.toLowerCase().includes(searchTerm) ||
       item.category.toLowerCase().includes(searchTerm) ||
       (item.badge && item.badge.toLowerCase().includes(searchTerm));
-    
+
     return matchesCategory && matchesSearch;
   });
 
@@ -280,7 +280,7 @@ const Marketplace = () => {
                 <div className="inline-flex items-center bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 rounded-full px-6 py-3 mb-8">
                   <span className="text-amber-300 text-sm font-medium">🛒 Premium Marketplace</span>
                 </div>
-                
+
                 <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
                   <span className="bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
                     Market
@@ -288,13 +288,13 @@ const Marketplace = () => {
                   <br />
                   <span className="text-amber-400">place</span>
                 </h1>
-                
+
                 <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto lg:mx-0 leading-relaxed">
                   Discover premium furniture and materials with quality that meets affordability in our curated collection.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                  <button 
+                  <button
                     onClick={() => scrollToSection('products')}
                     className="group relative bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl"
                   >
@@ -303,16 +303,16 @@ const Marketplace = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="relative">
                 <div className="relative group">
-                  <img 
-                    src={marketplaceHeroImg} 
-                    alt="Marketplace - Premium Furniture and Materials" 
+                  <img
+                    src={marketplaceHeroImg}
+                    alt="Marketplace - Premium Furniture and Materials"
                     className="w-full h-96 lg:h-[500px] object-cover rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent rounded-3xl"></div>
-                  
+
                   {/* Floating decorative elements */}
                   <div className="absolute -top-4 -right-4 w-20 h-20 bg-amber-400/80 rounded-full animate-pulse"></div>
                   <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-orange-400/60 rounded-full animate-bounce"></div>
@@ -321,7 +321,7 @@ const Marketplace = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Search Bar Section - Extended from Hero */}
         <div className="relative z-10 pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -344,20 +344,20 @@ const Marketplace = () => {
                     <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-md opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </div>
-                
+
                 {/* Main Search Input */}
-                <input 
+                <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={handleSearchKeyPress}
                   placeholder="Search furniture, materials, brands, or categories..."
-                  className="w-full pl-16 lg:pl-20 pr-24 lg:pr-28 py-4 lg:py-5 rounded-3xl text-gray-900 bg-white/15 backdrop-blur-md border-2 border-white/30 focus:outline-none focus:ring-4 focus:ring-amber-400/50 focus:border-amber-400 focus:bg-white/20 placeholder-gray-400 text-base lg:text-lg font-medium transition-all duration-300 shadow-xl hover:shadow-2xl focus:shadow-2xl"
+                  className="w-full pl-12 sm:pl-16 lg:pl-20 pr-20 lg:pr-28 py-4 lg:py-5 rounded-3xl text-gray-900 bg-white/15 backdrop-blur-md border-2 border-white/30 focus:outline-none focus:ring-4 focus:ring-amber-400/50 focus:border-amber-400 focus:bg-white/20 placeholder-gray-400 text-base lg:text-lg font-medium transition-all duration-300 shadow-xl hover:shadow-2xl focus:shadow-2xl"
                 />
-                
+
                 {/* Clear Button */}
                 {searchQuery && (
-                  <button 
+                  <button
                     onClick={clearSearch}
                     className="absolute right-20 lg:right-24 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-400/20 hover:bg-gray-400/30 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 transform hover:scale-110 backdrop-blur-sm"
                     title="Clear search"
@@ -367,9 +367,9 @@ const Marketplace = () => {
                     </svg>
                   </button>
                 )}
-                
+
                 {/* Search Button */}
-                <button 
+                <button
                   onClick={handleSearch}
                   className="absolute right-1 top-1 bottom-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white px-6 lg:px-8 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm lg:text-base flex items-center space-x-2 shadow-xl"
                 >
@@ -378,15 +378,15 @@ const Marketplace = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
-                
+
                 {/* Animated Border Effect */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-amber-400/20 via-orange-400/20 to-red-400/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 -z-10 blur-sm"></div>
-                
+
                 {/* Floating Particles Effect */}
                 <div className="absolute -top-2 -right-2 w-3 h-3 bg-amber-400/60 rounded-full animate-ping opacity-0 group-focus-within:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-orange-400/60 rounded-full animate-bounce opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 delay-200"></div>
               </div>
-              
+
               {/* Search Suggestions/Quick Filters */}
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <span className="text-sm text-gray-400 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm hover:bg-white/20 transition-colors cursor-pointer">Try: "sofa"</span>
@@ -429,23 +429,22 @@ const Marketplace = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Explore Our Collections</h2>
             <p className="text-xl text-gray-600">Find exactly what you're looking for</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {categories.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`group relative p-8 rounded-3xl transition-all duration-300 transform hover:-translate-y-2 ${
-                  selectedCategory === category.id
+                className={`group relative p-8 rounded-3xl transition-all duration-300 transform hover:-translate-y-2 ${selectedCategory === category.id
                     ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-2xl scale-105'
                     : 'bg-white hover:bg-gradient-to-br hover:from-amber-50 hover:to-orange-50 text-gray-700 hover:text-amber-600 shadow-lg hover:shadow-xl'
-                }`}
+                  }`}
               >
                 <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                   {category.icon}
                 </div>
                 <div className="text-lg font-semibold">{category.name}</div>
-                
+
                 {selectedCategory === category.id && (
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 transform -skew-x-12 animate-pulse rounded-2xl"></div>
                 )}
@@ -473,20 +472,20 @@ const Marketplace = () => {
                 {searchQuery && ` for "${searchQuery}"`}
               </p>
             </div>
-            
+
             <div className="flex space-x-2">
               <button className="px-4 py-2 bg-gray-100 rounded-lg text-sm hover:bg-gray-200 transition-colors">
                 Sort by: Popular
               </button>
             </div>
           </div>
-          
+
           {filteredItems.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">No products found</h3>
               <p className="text-gray-600 mb-6">
-                {searchQuery 
+                {searchQuery
                   ? `No products found for "${searchQuery}". Try a different search term.`
                   : 'No products match your current filters. Try adjusting your search criteria.'
                 }
@@ -503,118 +502,116 @@ const Marketplace = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredItems.map((item, index) => (
-              <div 
-                key={item.id} 
-                className={`group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden ${
-                  isVisible.products ? `animate-fade-in-up delay-${index * 100}` : 'opacity-0'
-                }`}
-              >
-                {/* Product Badge */}
-                {item.badge && (
-                  <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getBadgeColor(item.badge)}`}>
-                    {item.badge}
-                  </div>
-                )}
-                
-                {/* Product Image */}
-                <div className="relative p-8 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-amber-50 group-hover:to-orange-50 transition-all duration-500">
-                  <div className="w-full h-48 mb-4 transform group-hover:scale-110 transition-transform duration-500 rounded-lg overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-6xl" style={{display: 'none'}}>
-                      {item.name.includes('Living') ? '🛋️' : 
-                       item.name.includes('Dining') ? '🍽️' : 
-                       item.name.includes('Bed') ? '🛏️' : 
-                       item.name.includes('Desk') ? '🖥️' : 
-                       item.name.includes('Bookshelf') ? '📚' : 
-                       item.name.includes('Kitchen') ? '🏠' : 
-                       item.name.includes('Plywood') ? '🪵' : 
-                       item.name.includes('Laminates') ? '🎨' : 
-                       item.name.includes('Sunmica') ? '✨' : 
-                       item.name.includes('Hardware') ? '🔧' : '📦'}
+                <div
+                  key={item.id}
+                  className={`group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden ${isVisible.products ? `animate-fade-in-up delay-${index * 100}` : 'opacity-0'
+                    }`}
+                >
+                  {/* Product Badge */}
+                  {item.badge && (
+                    <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getBadgeColor(item.badge)}`}>
+                      {item.badge}
+                    </div>
+                  )}
+
+                  {/* Product Image */}
+                  <div className="relative p-8 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-amber-50 group-hover:to-orange-50 transition-all duration-500">
+                    <div className="w-full h-48 mb-4 transform group-hover:scale-110 transition-transform duration-500 rounded-lg overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-6xl" style={{ display: 'none' }}>
+                        {item.name.includes('Living') ? '🛋️' :
+                          item.name.includes('Dining') ? '🍽️' :
+                            item.name.includes('Bed') ? '🛏️' :
+                              item.name.includes('Desk') ? '🖥️' :
+                                item.name.includes('Bookshelf') ? '📚' :
+                                  item.name.includes('Kitchen') ? '🏠' :
+                                    item.name.includes('Plywood') ? '🪵' :
+                                      item.name.includes('Laminates') ? '🎨' :
+                                        item.name.includes('Sunmica') ? '✨' :
+                                          item.name.includes('Hardware') ? '🔧' : '📦'}
+                      </div>
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    {/* Quick Actions */}
+                    <div className="absolute top-4 right-4 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <button className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                        ❤️
+                      </button>
+                      <button className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                        👁️
+                      </button>
                     </div>
                   </div>
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Quick Actions */}
-                  <div className="absolute top-4 right-4 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      ❤️
-                    </button>
-                    <button className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      👁️
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Product Info */}
-                <div className="p-6">
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-amber-600 transition-colors">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                  
-                  {/* Rating */}
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-sm">
-                          {i < Math.floor(item.rating) ? '⭐' : '☆'}
-                        </span>
-                      ))}
+
+                  {/* Product Info */}
+                  <div className="p-6">
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-amber-600 transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+
+                    {/* Rating */}
+                    <div className="flex items-center mb-4">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-sm">
+                            {i < Math.floor(item.rating) ? '⭐' : '☆'}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-600 ml-2">
+                        {item.rating} ({item.reviews} reviews)
+                      </span>
                     </div>
-                    <span className="text-sm text-gray-600 ml-2">
-                      {item.rating} ({item.reviews} reviews)
-                    </span>
-                  </div>
-                  
-                  {/* Price */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-2xl font-bold text-amber-600">{item.price}</span>
+
+                    {/* Price */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-2xl font-bold text-amber-600">{item.price}</span>
+                        {item.originalPrice && (
+                          <span className="text-sm text-gray-500 line-through">{item.originalPrice}</span>
+                        )}
+                      </div>
                       {item.originalPrice && (
-                        <span className="text-sm text-gray-500 line-through">{item.originalPrice}</span>
+                        <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full font-semibold">
+                          Save {Math.round(((parseInt(item.originalPrice.replace(/[^0-9]/g, '')) - parseInt(item.price.replace(/[^0-9]/g, ''))) / parseInt(item.originalPrice.replace(/[^0-9]/g, ''))) * 100)}%
+                        </span>
                       )}
                     </div>
-                    {item.originalPrice && (
-                      <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full font-semibold">
-                        Save {Math.round(((parseInt(item.originalPrice.replace(/[^0-9]/g, '')) - parseInt(item.price.replace(/[^0-9]/g, ''))) / parseInt(item.originalPrice.replace(/[^0-9]/g, ''))) * 100)}%
-                      </span>
-                    )}
+
+                    {/* Add to Cart Button */}
+                    <button
+                      onClick={() => handleAddToCart(item)}
+                      className={`w-full py-3 px-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${isInCart(item.id)
+                          ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white shadow-lg'
+                          : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white shadow-lg'
+                        }`}
+                    >
+                      {isInCart(item.id) ? (
+                        <span className="flex items-center justify-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          In Cart ({getItemQuantity(item.id)})
+                        </span>
+                      ) : (
+                        'Add to Cart'
+                      )}
+                    </button>
                   </div>
-                  
-                  {/* Add to Cart Button */}
-                  <button 
-                    onClick={() => handleAddToCart(item)}
-                    className={`w-full py-3 px-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                      isInCart(item.id)
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white shadow-lg'
-                        : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white shadow-lg'
-                    }`}
-                  >
-                    {isInCart(item.id) ? (
-                      <span className="flex items-center justify-center">
-                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        In Cart ({getItemQuantity(item.id)})
-                      </span>
-                    ) : (
-                      'Add to Cart'
-                    )}
-                  </button>
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           )}
         </div>
@@ -630,7 +627,7 @@ const Marketplace = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Premium Shopping Experience</h2>
             <p className="text-xl text-gray-600">Exceptional service that sets us apart</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -652,11 +649,10 @@ const Marketplace = () => {
                 color: "from-purple-500 to-pink-500"
               }
             ].map((feature, index) => (
-              <div 
-                key={index} 
-                className={`group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 ${
-                  isVisible.features ? `animate-fade-in-up delay-${index * 200}` : 'opacity-0'
-                }`}
+              <div
+                key={index}
+                className={`group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 ${isVisible.features ? `animate-fade-in-up delay-${index * 200}` : 'opacity-0'
+                  }`}
               >
                 <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:scale-110 transition-transform duration-300`}>
                   <span className="text-3xl">{feature.icon}</span>
@@ -677,23 +673,23 @@ const Marketplace = () => {
           <div className="absolute bottom-10 right-10 w-48 h-48 bg-orange-400/5 rounded-full animate-bounce"></div>
           <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-yellow-400/10 rounded-full animate-ping"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 rounded-full px-6 py-3 mb-8">
             <span className="text-amber-300 text-sm font-medium">🔨 Custom Solutions</span>
           </div>
-          
+
           <h2 className="text-5xl font-bold text-white mb-8 leading-tight">
             Need Custom Furniture?
           </h2>
-          
+
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Can't find what you're looking for? Our expert carpenters can create custom pieces just for you. 
+            Can't find what you're looking for? Our expert carpenters can create custom pieces just for you.
             From concept to creation, we bring your vision to life.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
+            <Link
               to="/contact"
               state={{ bookProfessional: true }}
               className="group relative bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block"
@@ -701,8 +697,8 @@ const Marketplace = () => {
               <span className="relative z-10">Book Expert Carpenter</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-700"></div>
             </Link>
-            
-            <Link 
+
+            <Link
               to="/contact"
               state={{ bookProfessional: true }}
               className="group border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-slate-900 font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 inline-block"
@@ -751,15 +747,15 @@ const Marketplace = () => {
               <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl">🔐</span>
               </div>
-              
+
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 Login Required
               </h3>
-              
+
               <p className="text-gray-600 mb-8 leading-relaxed">
                 Please log in to add items to your cart and continue shopping.
               </p>
-              
+
               <div className="space-y-4">
                 <button
                   onClick={() => handleLoginPrompt('login')}
@@ -767,7 +763,7 @@ const Marketplace = () => {
                 >
                   Go to Login
                 </button>
-                
+
                 <button
                   onClick={() => handleLoginPrompt('cancel')}
                   className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-3 px-6 rounded-2xl transition-all duration-300"
